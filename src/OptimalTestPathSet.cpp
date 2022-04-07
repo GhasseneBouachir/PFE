@@ -87,7 +87,7 @@ void a_star_based_path_generator(int start, vector<int> tObs){
 	int i = 0;
 	if(!open.empty()){
 		current = open.top();}
-	while(get<2>(current) != INT_MAX && i <50){
+	while(get<2>(current) != INT_MAX && i <100){
 //		print(open);
 //		cout << "\n";
 		if(!open.empty())open.pop();
@@ -97,16 +97,20 @@ void a_star_based_path_generator(int start, vector<int> tObs){
 					nodes = get<3>(current);
 					transitions.push_back(it->second);
 					nodes.push_back(it->first);
-					if(count(get<3>(current).begin(), get<3>(current).end(),it->first)<2){
+					if(count(get<3>(current).begin(), get<3>(current).end(),it->first)==0){
 						open.emplace(make_tuple(transitions,transitions.size(),getHeuristic(transitions,transitions.back(),get<2>(current)), nodes));
 					}
+					else if(count(get<3>(current).begin(), get<3>(current).end(),it->first)==1){
+						open.emplace(make_tuple(transitions,transitions.size(),getHeuristic(transitions,transitions.back(),get<2>(current)), nodes));
+//						open.emplace(make_tuple(transitions,transitions.size(),INT_MAX, nodes));
+					}
 					else if(count(get<3>(current).begin(), get<3>(current).end(),it->first)==2){
-						do{
-							transitions.pop_back();
-							nodes.pop_back();
-						}
-						while(nodes.back()!=it->first);
-						open.emplace(make_tuple(transitions,transitions.size(),INT_MAX, nodes));
+//						do{
+//							transitions.pop_back();
+//							nodes.pop_back();
+//						}
+//						while(nodes.back()!=it->first);
+//						open.emplace(make_tuple(transitions,transitions.size(),INT_MAX, nodes));
 					}
 			}
 		}
@@ -226,67 +230,6 @@ vii tmpVPair;
 //
 //AdjList.push_back(tmpVPair);
 
-//0
-tmpPair.first = 1;
-tmpPair.second = 0;
-tmpVPair.push_back(tmpPair);
-AdjList.push_back(tmpVPair);
-tmpVPair.clear();
-
-//1
-tmpPair.first = 2;
-tmpPair.second = 0;
-tmpVPair.push_back(tmpPair);
-AdjList.push_back(tmpVPair);
-tmpVPair.clear();
-
-//2
-tmpPair.first = 3;
-tmpPair.second = 0;
-tmpVPair.push_back(tmpPair);
-tmpPair.first = 4;
-tmpPair.second = 0;
-tmpVPair.push_back(tmpPair);
-tmpPair.first = 5;
-tmpPair.second = 0;
-tmpVPair.push_back(tmpPair);
-AdjList.push_back(tmpVPair);
-tmpVPair.clear();
-
-
-//3
-tmpPair.first = 1;
-tmpPair.second = 0;
-tmpVPair.push_back(tmpPair);
-tmpPair.first = 7;
-tmpPair.second = 0;
-tmpVPair.push_back(tmpPair);
-AdjList.push_back(tmpVPair);
-tmpVPair.clear();
-
-//4
-AdjList.push_back(tmpVPair);
-tmpVPair.clear();
-
-//5
-tmpPair.first = 6;
-tmpPair.second = 0;
-tmpVPair.push_back(tmpPair);
-AdjList.push_back(tmpVPair);
-tmpVPair.clear();
-
-
-//6
-tmpPair.first = 0;
-tmpPair.second = 0;
-tmpVPair.push_back(tmpPair);
-AdjList.push_back(tmpVPair);
-tmpVPair.clear();
-
-//7
-AdjList.push_back(tmpVPair);
-tmpVPair.clear();
-
 ////0
 //tmpPair.first = 1;
 //tmpPair.second = 0;
@@ -298,14 +241,17 @@ tmpVPair.clear();
 //tmpPair.first = 2;
 //tmpPair.second = 0;
 //tmpVPair.push_back(tmpPair);
-////tmpPair.first = 4;
-////tmpPair.second = 0;
-////tmpVPair.push_back(tmpPair);
 //AdjList.push_back(tmpVPair);
 //tmpVPair.clear();
 //
 ////2
 //tmpPair.first = 3;
+//tmpPair.second = 0;
+//tmpVPair.push_back(tmpPair);
+//tmpPair.first = 4;
+//tmpPair.second = 0;
+//tmpVPair.push_back(tmpPair);
+//tmpPair.first = 5;
 //tmpPair.second = 0;
 //tmpVPair.push_back(tmpPair);
 //AdjList.push_back(tmpVPair);
@@ -316,12 +262,70 @@ tmpVPair.clear();
 //tmpPair.first = 1;
 //tmpPair.second = 0;
 //tmpVPair.push_back(tmpPair);
+//tmpPair.first = 7;
+//tmpPair.second = 0;
+//tmpVPair.push_back(tmpPair);
 //AdjList.push_back(tmpVPair);
 //tmpVPair.clear();
 //
 ////4
 //AdjList.push_back(tmpVPair);
 //tmpVPair.clear();
+//
+////5
+//tmpPair.first = 6;
+//tmpPair.second = 0;
+//tmpVPair.push_back(tmpPair);
+//AdjList.push_back(tmpVPair);
+//tmpVPair.clear();
+//
+//
+////6
+//tmpPair.first = 0;
+//tmpPair.second = 0;
+//tmpVPair.push_back(tmpPair);
+//AdjList.push_back(tmpVPair);
+//tmpVPair.clear();
+//
+////7
+//AdjList.push_back(tmpVPair);
+//tmpVPair.clear();
+
+//0
+tmpPair.first = 1;
+tmpPair.second = 0;
+tmpVPair.push_back(tmpPair);
+AdjList.push_back(tmpVPair);
+tmpVPair.clear();
+
+//1
+tmpPair.first = 2;
+tmpPair.second = 0;
+tmpVPair.push_back(tmpPair);
+tmpPair.first = 4;
+tmpPair.second = 0;
+tmpVPair.push_back(tmpPair);
+AdjList.push_back(tmpVPair);
+tmpVPair.clear();
+
+//2
+tmpPair.first = 3;
+tmpPair.second = 0;
+tmpVPair.push_back(tmpPair);
+AdjList.push_back(tmpVPair);
+tmpVPair.clear();
+
+
+//3
+tmpPair.first = 1;
+tmpPair.second = 0;
+tmpVPair.push_back(tmpPair);
+AdjList.push_back(tmpVPair);
+tmpVPair.clear();
+
+//4
+AdjList.push_back(tmpVPair);
+tmpVPair.clear();
 
 vector<int> tobs = {0,1,2,3};
 a_star_based_path_generator(0,tobs);
